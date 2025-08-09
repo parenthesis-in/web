@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Github, Linkedin, Twitter, Mail, Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
@@ -8,7 +9,8 @@ const Footer: React.FC = () => {
     { label: 'Home', href: '#home' },
     { label: 'About', href: '#about' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Contact', href: '#contact' }
+    { label: 'Contact', href: '#contact' },
+    { label: 'Blog', href: '/blog' }
   ];
 
   const projects = [
@@ -26,11 +28,13 @@ const Footer: React.FC = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    if (href.startsWith('#')) {
+    if (href.startsWith('#') && window.location.pathname === '/') {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    } else if (href.startsWith('#')) {
+      window.location.href = '/' + href;
     }
   };
 
@@ -76,12 +80,21 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <button
-                    onClick={() => scrollToSection(link.href)}
-                    className="text-gray-300 hover:text-blue-400 transition-colors duration-200"
-                  >
-                    {link.label}
-                  </button>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      to={link.href}
+                      className="text-gray-300 hover:text-blue-400 transition-colors duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => scrollToSection(link.href)}
+                      className="text-gray-300 hover:text-blue-400 transition-colors duration-200"
+                    >
+                      {link.label}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
@@ -119,15 +132,15 @@ const Footer: React.FC = () => {
 
           {/* Additional Links */}
           <div className="flex space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-blue-400 transition-colors duration-200">
+            <Link to="/privacy" className="hover:text-blue-400 transition-colors duration-200">
               Privacy Policy
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors duration-200">
+            </Link>
+            <Link to="/terms" className="hover:text-blue-400 transition-colors duration-200">
               Terms of Service
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-colors duration-200">
+            </Link>
+            <Link to="/license" className="hover:text-blue-400 transition-colors duration-200">
               Open Source License
-            </a>
+            </Link>
           </div>
         </div>
 

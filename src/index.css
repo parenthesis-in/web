@@ -1,3 +1,178 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Theme-specific styles */
+.theme-light {
+  --primary-bg: #ffffff;
+  --secondary-bg: #f8fafc;
+  --accent-color: #3b82f6;
+}
+
+.theme-dark {
+  --primary-bg: #111827;
+  --secondary-bg: #1f2937;
+  --accent-color: #3b82f6;
+}
+
+.theme-yellow-dark {
+  --primary-bg: #111827;
+  --secondary-bg: #1f2937;
+  --accent-color: #eab308;
+}
+
+.theme-dark-yellow {
+  --primary-bg: #451a03;
+  --secondary-bg: #78350f;
+  --accent-color: #facc15;
+}
+
+.theme-blue-light {
+  --primary-bg: #eff6ff;
+  --secondary-bg: #dbeafe;
+  --accent-color: #2563eb;
+}
+
+.theme-purple-dark {
+  --primary-bg: #111827;
+  --secondary-bg: #1f2937;
+  --accent-color: #a855f7;
+}
+
+.theme-green-light {
+  --primary-bg: #f0fdf4;
+  --secondary-bg: #dcfce7;
+  --accent-color: #16a34a;
+}
+
+.theme-orange-dark {
+  --primary-bg: #111827;
+  --secondary-bg: #1f2937;
+  --accent-color: #f97316;
+}
+
+/* Yellow Dark Theme Overrides */
+.theme-yellow-dark .bg-blue-600 {
+  @apply bg-yellow-600;
+}
+
+.theme-yellow-dark .hover\:bg-blue-700:hover {
+  @apply bg-yellow-700;
+}
+
+.theme-yellow-dark .text-blue-600 {
+  @apply text-yellow-600;
+}
+
+.theme-yellow-dark .border-blue-600 {
+  @apply border-yellow-600;
+}
+
+.theme-yellow-dark .from-blue-600 {
+  @apply from-yellow-600;
+}
+
+.theme-yellow-dark .to-purple-600 {
+  @apply to-yellow-500;
+}
+
+/* Dark Yellow Theme Overrides */
+.theme-dark-yellow .bg-white {
+  @apply bg-yellow-900;
+}
+
+.theme-dark-yellow .bg-gray-50 {
+  @apply bg-yellow-800;
+}
+
+.theme-dark-yellow .text-gray-900 {
+  @apply text-yellow-100;
+}
+
+.theme-dark-yellow .bg-blue-600 {
+  @apply bg-yellow-500;
+}
+
+.theme-dark-yellow .hover\:bg-blue-700:hover {
+  @apply bg-yellow-600;
+}
+
+/* Purple Dark Theme Overrides */
+.theme-purple-dark .bg-blue-600 {
+  @apply bg-purple-600;
+}
+
+.theme-purple-dark .hover\:bg-blue-700:hover {
+  @apply bg-purple-700;
+}
+
+.theme-purple-dark .text-blue-600 {
+  @apply text-purple-600;
+}
+
+.theme-purple-dark .border-blue-600 {
+  @apply border-purple-600;
+}
+
+.theme-purple-dark .from-blue-600 {
+  @apply from-purple-600;
+}
+
+/* Green Light Theme Overrides */
+.theme-green-light .bg-white {
+  @apply bg-green-50;
+}
+
+.theme-green-light .bg-gray-50 {
+  @apply bg-green-100;
+}
+
+.theme-green-light .bg-blue-600 {
+  @apply bg-green-600;
+}
+
+.theme-green-light .hover\:bg-blue-700:hover {
+  @apply bg-green-700;
+}
+
+.theme-green-light .text-blue-600 {
+  @apply text-green-600;
+}
+
+.theme-green-light .border-blue-600 {
+  @apply border-green-600;
+}
+
+/* Blue Light Theme Overrides */
+.theme-blue-light .bg-white {
+  @apply bg-blue-50;
+}
+
+.theme-blue-light .bg-gray-50 {
+  @apply bg-blue-100;
+}
+
+/* Orange Dark Theme Overrides */
+.theme-orange-dark .bg-blue-600 {
+  @apply bg-orange-600;
+}
+
+.theme-orange-dark .hover\:bg-blue-700:hover {
+  @apply bg-orange-700;
+}
+
+.theme-orange-dark .text-blue-600 {
+  @apply text-orange-600;
+}
+
+.theme-orange-dark .border-blue-600 {
+  @apply border-orange-600;
+}
+
+.theme-orange-dark .from-blue-600 {
+  @apply from-orange-600;
+}
+
+.theme-orange-dark .to-purple-600 {
+  @apply to-orange-500;
+}
