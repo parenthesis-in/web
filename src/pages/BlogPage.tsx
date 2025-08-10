@@ -1,170 +1,221 @@
-import React, { useState } from 'react';
-import { Calendar, ArrowRight, BookOpen, TrendingUp, Users, Search, Tag, Clock } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calendar, ArrowRight, BookOpen, Search, Tag, Clock, ExternalLink, Loader } from 'lucide-react';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  published: string;
+  updated: string;
+  url: string;
+  author: {
+    displayName: string;
+    image?: {
+      url: string;
+    };
+  };
+  labels?: string[];
+  images?: {
+    url: string;
+  }[];
+}
+
+interface BloggerResponse {
+  items: BlogPost[];
+  nextPageToken?: string;
+}
 
 const BlogPage: React.FC = () => {
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [bloggerBlogId, setBloggerBlogId] = useState('');
+  const [bloggerApiKey, setBloggerApiKey] = useState('');
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'Building Distributed Payment Systems in India',
-      excerpt: 'Exploring the challenges and solutions for creating robust payment gateways that serve millions of users across diverse network conditions and regulatory requirements.',
-      content: `
-        <p>India's digital payment landscape has evolved rapidly over the past decade, with UPI transactions alone crossing 10 billion monthly transactions. However, building a distributed payment system that can handle this scale while maintaining security and compliance presents unique challenges.</p>
-        
-        <h3>Key Challenges</h3>
-        <p>When designing payment systems for the Indian market, we encounter several critical challenges:</p>
-        <ul>
-          <li><strong>Network Reliability:</strong> Varying internet connectivity across urban and rural areas</li>
-          <li><strong>Regulatory Compliance:</strong> RBI guidelines and PCI DSS requirements</li>
-          <li><strong>Scale:</strong> Handling millions of concurrent transactions</li>
-          <li><strong>Security:</strong> Protecting against fraud while maintaining user experience</li>
-        </ul>
-        
-        <h3>Our Approach with Asterisk</h3>
-        <p>At Parenthesis India, we're building Asterisk as an open-source distributed payment gateway that addresses these challenges through:</p>
-        <ul>
-          <li>Microservices architecture for better scalability</li>
-          <li>Multi-provider support for redundancy</li>
-          <li>Real-time fraud detection using ML algorithms</li>
-          <li>Comprehensive audit trails for compliance</li>
-        </ul>
-        
-        <p>The system is designed to be cloud-native, supporting both traditional banking integrations and modern fintech APIs.</p>
-      `,
-      category: 'Finance Tech',
-      readTime: '8 min read',
-      date: '2024-12-15',
-      author: 'Sagar Ved Bairwa',
-      tags: ['Payments', 'Distributed Systems', 'Fintech', 'Open Source'],
-      image: 'https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=800',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Open Source AI: Making Intelligence Accessible',
-      excerpt: 'How open-source AI frameworks are democratizing artificial intelligence and enabling startups to compete with tech giants in the Indian market.',
-      content: `
-        <p>The AI revolution is here, but access to advanced AI capabilities has traditionally been limited to large corporations with massive resources. Open-source AI is changing this landscape, making sophisticated AI tools available to everyone.</p>
-        
-        <h3>The Open Source Advantage</h3>
-        <p>Open-source AI frameworks offer several key benefits:</p>
-        <ul>
-          <li><strong>Cost Efficiency:</strong> No licensing fees or vendor lock-in</li>
-          <li><strong>Transparency:</strong> Full visibility into algorithms and decision-making</li>
-          <li><strong>Customization:</strong> Ability to modify and extend functionality</li>
-          <li><strong>Community Support:</strong> Large developer communities providing support</li>
-        </ul>
-        
-        <h3>TRIPTI AI: A Case Study</h3>
-        <p>Our TRIPTI AI project demonstrates how open-source AI can be leveraged to create intelligent travel assistants. By combining multiple open-source frameworks, we've built a system that:</p>
-        <ul>
-          <li>Understands natural language queries in multiple Indian languages</li>
-          <li>Provides personalized travel recommendations</li>
-          <li>Integrates with local service providers</li>
-          <li>Learns from user interactions to improve over time</li>
-        </ul>
-      `,
-      category: 'AI & ML',
-      readTime: '6 min read',
-      date: '2024-12-10',
-      author: 'Sagar Ved Bairwa',
-      tags: ['AI', 'Machine Learning', 'Open Source', 'Travel Tech'],
-      image: 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800',
-      featured: false
-    },
-    {
-      id: 3,
-      title: 'Microservices Architecture for Indian Startups',
-      excerpt: 'A practical guide to implementing microservices architecture while managing costs and complexity for growing Indian businesses.',
-      content: `
-        <p>Microservices architecture has become the gold standard for scalable applications, but implementing it correctly requires careful planning, especially for resource-conscious Indian startups.</p>
-        
-        <h3>When to Choose Microservices</h3>
-        <p>Microservices aren't always the right choice. Consider them when:</p>
-        <ul>
-          <li>Your team has grown beyond 8-10 developers</li>
-          <li>Different parts of your application have different scaling requirements</li>
-          <li>You need to use different technologies for different services</li>
-          <li>You want to enable independent deployments</li>
-        </ul>
-        
-        <h3>Cost-Effective Implementation</h3>
-        <p>For Indian startups, cost is always a concern. Here's how to implement microservices cost-effectively:</p>
-        <ul>
-          <li><strong>Start Small:</strong> Begin with a modular monolith and extract services gradually</li>
-          <li><strong>Use Open Source:</strong> Leverage tools like Docker, Kubernetes, and service meshes</li>
-          <li><strong>Cloud-Native:</strong> Use managed services to reduce operational overhead</li>
-          <li><strong>Monitoring:</strong> Implement comprehensive monitoring from day one</li>
-        </ul>
-        
-        <h3>DataBridge: Our Implementation</h3>
-        <p>DataBridge showcases how we've implemented microservices for identity and access management while keeping costs manageable through smart architectural decisions.</p>
-      `,
-      category: 'Architecture',
-      readTime: '10 min read',
-      date: '2024-12-05',
-      author: 'Sagar Ved Bairwa',
-      tags: ['Microservices', 'Architecture', 'Startups', 'Cost Optimization'],
-      image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'The Future of Chatbots in Indian Businesses',
-      excerpt: 'Exploring how conversational AI is transforming customer service and business operations across various industries in India.',
-      content: `
-        <p>Chatbots have evolved from simple rule-based systems to sophisticated AI-powered assistants that can handle complex customer interactions. In the Indian market, this evolution is particularly significant.</p>
-        
-        <h3>Market Opportunity</h3>
-        <p>The Indian chatbot market is experiencing rapid growth due to:</p>
-        <ul>
-          <li>Increasing smartphone penetration</li>
-          <li>Growing comfort with digital interactions</li>
-          <li>Need for 24/7 customer support</li>
-          <li>Cost pressures on businesses</li>
-        </ul>
-        
-        <h3>Parenthesis CaaS: Our Vision</h3>
-        <p>Our upcoming Chatbot as a Service platform aims to democratize access to advanced conversational AI by providing:</p>
-        <ul>
-          <li>Easy integration with existing systems</li>
-          <li>Multi-language support including regional Indian languages</li>
-          <li>Industry-specific templates and workflows</li>
-          <li>Comprehensive analytics and insights</li>
-        </ul>
-      `,
-      category: 'AI & Business',
-      readTime: '7 min read',
-      date: '2024-11-28',
-      author: 'Sagar Ved Bairwa',
-      tags: ['Chatbots', 'AI', 'Customer Service', 'Business'],
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-      featured: false
+  // Configuration - Replace with your actual Blogger blog ID and API key
+  const BLOGGER_BLOG_ID = bloggerBlogId || 'YOUR_BLOGGER_BLOG_ID';
+  const BLOGGER_API_KEY = bloggerApiKey || 'YOUR_BLOGGER_API_KEY';
+
+  useEffect(() => {
+    fetchBlogPosts();
+  }, []);
+
+  const fetchBlogPosts = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Check if configuration is set
+      if (BLOGGER_BLOG_ID === 'YOUR_BLOGGER_BLOG_ID' || BLOGGER_API_KEY === 'YOUR_BLOGGER_API_KEY') {
+        // Use fallback static data if Blogger is not configured
+        setBlogPosts(getFallbackPosts());
+        setLoading(false);
+        return;
+      }
+
+      const response = await fetch(
+        `https://www.googleapis.com/blogger/v3/blogs/${BLOGGER_BLOG_ID}/posts?key=${BLOGGER_API_KEY}&maxResults=20&fetchImages=true&fetchBodies=true`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch blog posts: ${response.statusText}`);
+      }
+
+      const data: BloggerResponse = await response.json();
+      
+      if (data.items) {
+        const processedPosts = data.items.map(post => ({
+          ...post,
+          excerpt: extractExcerpt(post.content),
+          readTime: calculateReadTime(post.content)
+        }));
+        setBlogPosts(processedPosts);
+      } else {
+        setBlogPosts([]);
+      }
+    } catch (err) {
+      console.error('Error fetching blog posts:', err);
+      setError('Failed to load blog posts. Please try again later.');
+      // Use fallback data on error
+      setBlogPosts(getFallbackPosts());
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  const categories = [
-    { id: 'all', name: 'All Posts', count: blogPosts.length },
-    { id: 'finance-tech', name: 'Finance Tech', count: blogPosts.filter(p => p.category === 'Finance Tech').length },
-    { id: 'ai-ml', name: 'AI & ML', count: blogPosts.filter(p => p.category.includes('AI')).length },
-    { id: 'architecture', name: 'Architecture', count: blogPosts.filter(p => p.category === 'Architecture').length }
-  ];
+  const extractExcerpt = (content: string): string => {
+    // Remove HTML tags and get first 200 characters
+    const textContent = content.replace(/<[^>]*>/g, '');
+    return textContent.length > 200 ? textContent.substring(0, 200) + '...' : textContent;
+  };
+
+  const calculateReadTime = (content: string): string => {
+    const wordsPerMinute = 200;
+    const textContent = content.replace(/<[^>]*>/g, '');
+    const wordCount = textContent.split(/\s+/).length;
+    const readTime = Math.ceil(wordCount / wordsPerMinute);
+    return `${readTime} min read`;
+  };
+
+  const getImageFromPost = (post: BlogPost): string => {
+    // Try to get image from post images
+    if (post.images && post.images.length > 0) {
+      return post.images[0].url;
+    }
+    
+    // Try to extract image from content
+    const imgMatch = post.content.match(/<img[^>]+src="([^">]+)"/);
+    if (imgMatch) {
+      return imgMatch[1];
+    }
+    
+    // Fallback to a default image based on category or use Pexels
+    const fallbackImages = [
+      'https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
+      'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800'
+    ];
+    
+    return fallbackImages[Math.floor(Math.random() * fallbackImages.length)];
+  };
+
+  const getFallbackPosts = (): BlogPost[] => {
+    return [
+      {
+        id: '1',
+        title: 'Building Distributed Payment Systems in India',
+        content: '<p>Exploring the challenges and solutions for creating robust payment gateways that serve millions of users across diverse network conditions and regulatory requirements.</p>',
+        excerpt: 'Exploring the challenges and solutions for creating robust payment gateways that serve millions of users across diverse network conditions and regulatory requirements.',
+        published: '2024-12-15T10:00:00Z',
+        updated: '2024-12-15T10:00:00Z',
+        url: '#',
+        author: {
+          displayName: 'Sagar Ved Bairwa'
+        },
+        labels: ['Payments', 'Distributed Systems', 'Fintech', 'Open Source'],
+        images: [{
+          url: 'https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=800'
+        }]
+      },
+      {
+        id: '2',
+        title: 'Open Source AI: Making Intelligence Accessible',
+        content: '<p>How open-source AI frameworks are democratizing artificial intelligence and enabling startups to compete with tech giants in the Indian market.</p>',
+        excerpt: 'How open-source AI frameworks are democratizing artificial intelligence and enabling startups to compete with tech giants in the Indian market.',
+        published: '2024-12-10T10:00:00Z',
+        updated: '2024-12-10T10:00:00Z',
+        url: '#',
+        author: {
+          displayName: 'Sagar Ved Bairwa'
+        },
+        labels: ['AI', 'Machine Learning', 'Open Source', 'Technology'],
+        images: [{
+          url: 'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=800'
+        }]
+      },
+      {
+        id: '3',
+        title: 'Microservices Architecture for Indian Startups',
+        content: '<p>A practical guide to implementing microservices architecture while managing costs and complexity for growing Indian businesses.</p>',
+        excerpt: 'A practical guide to implementing microservices architecture while managing costs and complexity for growing Indian businesses.',
+        published: '2024-12-05T10:00:00Z',
+        updated: '2024-12-05T10:00:00Z',
+        url: '#',
+        author: {
+          displayName: 'Sagar Ved Bairwa'
+        },
+        labels: ['Microservices', 'Architecture', 'Startups', 'Technology'],
+        images: [{
+          url: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800'
+        }]
+      }
+    ];
+  };
+
+  const categories = React.useMemo(() => {
+    const allLabels = blogPosts.flatMap(post => post.labels || []);
+    const uniqueLabels = Array.from(new Set(allLabels));
+    
+    return [
+      { id: 'all', name: 'All Posts', count: blogPosts.length },
+      ...uniqueLabels.map(label => ({
+        id: label.toLowerCase().replace(/\s+/g, '-'),
+        name: label,
+        count: blogPosts.filter(post => post.labels?.includes(label)).length
+      }))
+    ];
+  }, [blogPosts]);
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+                         (post.labels && post.labels.some(label => label.toLowerCase().includes(searchTerm.toLowerCase())));
     
     const matchesCategory = selectedCategory === 'all' || 
-                           post.category.toLowerCase().replace(/\s+/g, '-') === selectedCategory;
+                           (post.labels && post.labels.some(label => 
+                             label.toLowerCase().replace(/\s+/g, '-') === selectedCategory
+                           ));
     
     return matchesSearch && matchesCategory;
   });
 
-  const featuredPost = blogPosts.find(post => post.featured);
-  const regularPosts = blogPosts.filter(post => !post.featured);
+  const featuredPost = filteredPosts[0]; // Use the first post as featured
+  const regularPosts = filteredPosts.slice(1);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-16 bg-white dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <Loader className="animate-spin text-blue-600 dark:text-blue-400 mx-auto mb-4" size={48} />
+          <p className="text-gray-600 dark:text-gray-300">Loading blog posts...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-16 bg-white dark:bg-gray-900">
@@ -182,6 +233,29 @@ const BlogPage: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Configuration Notice */}
+        {(BLOGGER_BLOG_ID === 'YOUR_BLOGGER_BLOG_ID' || BLOGGER_API_KEY === 'YOUR_BLOGGER_API_KEY') && (
+          <div className="mb-8 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-4 rounded-lg">
+            <p className="text-yellow-800 dark:text-yellow-200 text-sm">
+              <strong>Note:</strong> Blogger integration is not configured. Showing sample posts. 
+              To connect your Blogger feed, update the BLOGGER_BLOG_ID and BLOGGER_API_KEY in the code.
+            </p>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className="mb-8 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg">
+            <p className="text-red-800 dark:text-red-200">{error}</p>
+            <button
+              onClick={fetchBlogPosts}
+              className="mt-2 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 underline"
+            >
+              Try again
+            </button>
+          </div>
+        )}
+
         {/* Search and Filters */}
         <div className="mb-12">
           <div className="flex flex-col md:flex-row gap-4 mb-8">
@@ -224,19 +298,21 @@ const BlogPage: React.FC = () => {
               <div className="md:flex">
                 <div className="md:w-1/2">
                   <img
-                    src={featuredPost.image}
+                    src={getImageFromPost(featuredPost)}
                     alt={featuredPost.title}
                     className="w-full h-64 md:h-full object-cover"
                   />
                 </div>
                 <div className="md:w-1/2 p-8">
                   <div className="flex items-center space-x-4 mb-4">
-                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium">
-                      {featuredPost.category}
-                    </span>
+                    {featuredPost.labels && featuredPost.labels.length > 0 && (
+                      <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium">
+                        {featuredPost.labels[0]}
+                      </span>
+                    )}
                     <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                       <Calendar size={14} className="mr-1" />
-                      {new Date(featuredPost.date).toLocaleDateString()}
+                      {new Date(featuredPost.published).toLocaleDateString()}
                     </div>
                   </div>
                   
@@ -251,16 +327,21 @@ const BlogPage: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
                       <span className="text-sm text-gray-500 dark:text-gray-400">
-                        By {featuredPost.author}
+                        By {featuredPost.author.displayName}
                       </span>
                       <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {featuredPost.readTime}
+                        {calculateReadTime(featuredPost.content)}
                       </span>
                     </div>
-                    <button className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
+                    <a
+                      href={featuredPost.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+                    >
                       <span>Read More</span>
-                      <ArrowRight size={16} />
-                    </button>
+                      <ExternalLink size={16} />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -270,25 +351,27 @@ const BlogPage: React.FC = () => {
 
         {/* Blog Posts Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
+          {(selectedCategory === 'all' && !searchTerm ? regularPosts : filteredPosts).map((post) => (
             <article
               key={post.id}
               className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 group"
             >
               <img
-                src={post.image}
+                src={getImageFromPost(post)}
                 alt={post.title}
                 className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
               
               <div className="p-6">
                 <div className="flex items-center space-x-4 mb-3">
-                  <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium">
-                    {post.category}
-                  </span>
+                  {post.labels && post.labels.length > 0 && (
+                    <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium">
+                      {post.labels[0]}
+                    </span>
+                  )}
                   <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                     <Clock size={14} className="mr-1" />
-                    {post.readTime}
+                    {calculateReadTime(post.content)}
                   </div>
                 </div>
                 
@@ -301,13 +384,13 @@ const BlogPage: React.FC = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.slice(0, 3).map((tag) => (
+                  {post.labels?.slice(0, 3).map((label) => (
                     <span
-                      key={tag}
+                      key={label}
                       className="flex items-center space-x-1 px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded text-xs"
                     >
                       <Tag size={10} />
-                      <span>{tag}</span>
+                      <span>{label}</span>
                     </span>
                   ))}
                 </div>
@@ -315,12 +398,17 @@ const BlogPage: React.FC = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                     <Calendar size={14} className="mr-1" />
-                    {new Date(post.date).toLocaleDateString()}
+                    {new Date(post.published).toLocaleDateString()}
                   </div>
-                  <button className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
+                  <a
+                    href={post.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+                  >
                     <span>Read</span>
-                    <ArrowRight size={16} />
-                  </button>
+                    <ExternalLink size={16} />
+                  </a>
                 </div>
               </div>
             </article>
@@ -328,7 +416,7 @@ const BlogPage: React.FC = () => {
         </div>
 
         {/* No Results */}
-        {filteredPosts.length === 0 && (
+        {filteredPosts.length === 0 && !loading && (
           <div className="text-center py-12">
             <BookOpen className="mx-auto text-gray-400 mb-4" size={48} />
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
@@ -358,6 +446,21 @@ const BlogPage: React.FC = () => {
             </button>
           </div>
         </div>
+
+        {/* Configuration Instructions */}
+        {(BLOGGER_BLOG_ID === 'YOUR_BLOGGER_BLOG_ID' || BLOGGER_API_KEY === 'YOUR_BLOGGER_API_KEY') && (
+          <div className="mt-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              How to Connect Your Blogger Feed
+            </h3>
+            <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+              <p><strong>Step 1:</strong> Get your Blogger Blog ID from your blog's URL or Blogger dashboard</p>
+              <p><strong>Step 2:</strong> Create a Google API key with Blogger API v3 enabled</p>
+              <p><strong>Step 3:</strong> Replace 'YOUR_BLOGGER_BLOG_ID' and 'YOUR_BLOGGER_API_KEY' in the code</p>
+              <p><strong>Step 4:</strong> The page will automatically fetch and display your latest blog posts</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
