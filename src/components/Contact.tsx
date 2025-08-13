@@ -44,8 +44,8 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: 'sagar@parenthesisindia.com',
-      href: 'mailto:sagar@parenthesisindia.com'
+      value: import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com',
+      href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com'}`
     },
     {
       icon: Phone,

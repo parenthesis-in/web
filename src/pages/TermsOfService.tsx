@@ -216,10 +216,10 @@ const TermsOfService: React.FC = () => {
             </p>
             <div className="space-y-2">
               <p className="text-blue-100">
-                <strong>Email:</strong> legal@parenthesisindia.com
+                <strong>Email:</strong> {import.meta.env.VITE_LEGAL_EMAIL || 'legal@parenthesisindia.com'}
               </p>
               <p className="text-blue-100">
-                <strong>General Contact:</strong> sagar@parenthesisindia.com
+                <strong>General Contact:</strong> {import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com'}
               </p>
               <p className="text-blue-100">
                 <strong>Address:</strong> India

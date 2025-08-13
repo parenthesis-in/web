@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import BlogPage from './pages/BlogPage';
 import TeamsPage from './pages/TeamsPage';
+import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import OpenSourceLicense from './pages/OpenSourceLicense';
@@ -24,6 +25,7 @@ function App() {
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/license" element={<OpenSourceLicense />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
           <Footer />

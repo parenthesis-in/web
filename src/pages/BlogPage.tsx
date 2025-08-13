@@ -35,9 +35,9 @@ const BlogPage: React.FC = () => {
   const [bloggerBlogId, setBloggerBlogId] = useState('');
   const [bloggerApiKey, setBloggerApiKey] = useState('');
 
-  // Configuration - Replace with your actual Blogger blog ID and API key
-  const BLOGGER_BLOG_ID = bloggerBlogId || 'YOUR_BLOGGER_BLOG_ID';
-  const BLOGGER_API_KEY = bloggerApiKey || 'YOUR_BLOGGER_API_KEY';
+  // Configuration from environment variables
+  const BLOGGER_BLOG_ID = import.meta.env.VITE_BLOGGER_BLOG_ID || 'YOUR_BLOGGER_BLOG_ID';
+  const BLOGGER_API_KEY = import.meta.env.VITE_BLOGGER_API_KEY || 'YOUR_BLOGGER_API_KEY';
 
   useEffect(() => {
     fetchBlogPosts();
@@ -456,8 +456,14 @@ const BlogPage: React.FC = () => {
             <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
               <p><strong>Step 1:</strong> Get your Blogger Blog ID from your blog's URL or Blogger dashboard</p>
               <p><strong>Step 2:</strong> Create a Google API key with Blogger API v3 enabled</p>
-              <p><strong>Step 3:</strong> Replace 'YOUR_BLOGGER_BLOG_ID' and 'YOUR_BLOGGER_API_KEY' in the code</p>
+              <p><strong>Step 3:</strong> Add VITE_BLOGGER_BLOG_ID and VITE_BLOGGER_API_KEY to your .env file</p>
               <p><strong>Step 4:</strong> The page will automatically fetch and display your latest blog posts</p>
+              <div className="mt-4 p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                <p className="font-mono text-xs">
+                  VITE_BLOGGER_BLOG_ID=your-blog-id<br/>
+                  VITE_BLOGGER_API_KEY=your-api-key
+                </p>
+              </div>
             </div>
           </div>
         )}

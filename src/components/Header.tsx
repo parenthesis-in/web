@@ -76,7 +76,7 @@ const Header: React.FC = () => {
             {/* Social Links - Hidden on small screens */}
             <div className="hidden lg:flex items-center space-x-3">
               <a
-                href="https://github.com/sagarvedbairwa"
+                href={import.meta.env.VITE_GITHUB_URL || 'https://github.com/sagarvedbairwa'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
                 <Github size={18} />
               </a>
               <a
-                href="https://linkedin.com/in/sagarvedbairwa"
+                href={import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/sagarvedbairwa'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
                 <Linkedin size={18} />
               </a>
               <a
-                href="https://twitter.com/sagarvedbairwa"
+                href={import.meta.env.VITE_TWITTER_URL || 'https://twitter.com/sagarvedbairwa'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -150,7 +150,7 @@ const Header: React.FC = () => {
               {/* Mobile Social Links */}
               <div className="flex items-center space-x-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <a
-                  href="https://github.com/sagarvedbairwa"
+                  href={import.meta.env.VITE_GITHUB_URL || 'https://github.com/sagarvedbairwa'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -159,7 +159,7 @@ const Header: React.FC = () => {
                   <Github size={20} />
                 </a>
                 <a
-                  href="https://linkedin.com/in/sagarvedbairwa"
+                  href={import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/sagarvedbairwa'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
@@ -168,7 +168,7 @@ const Header: React.FC = () => {
                   <Linkedin size={20} />
                 </a>
                 <a
-                  href="https://twitter.com/sagarvedbairwa"
+                  href={import.meta.env.VITE_TWITTER_URL || 'https://twitter.com/sagarvedbairwa'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
