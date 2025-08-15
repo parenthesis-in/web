@@ -10,13 +10,13 @@ const TeamsPage: React.FC = () => {
       bio: 'Passionate about building open-source solutions that bridge the gap between complex technology and practical applications. With expertise in distributed systems, AI, and payment technologies.',
       location: 'India',
       joinDate: '2024-01-01',
-      avatar: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
+      avatar: 'https://avatars.githubusercontent.com/u/56448072?v=4',
       skills: ['Java', 'Spring Boot', 'React', 'System Architecture', 'AI/ML', 'Payment Systems'],
       social: {
-        github: 'https://github.com/sagarvedbairwa',
-        linkedin: 'https://linkedin.com/in/sagarvedbairwa',
-        twitter: 'https://twitter.com/sagarvedbairwa',
-        email: 'sagar@parenthesisindia.com'
+        github: 'https://github.com/sagar-ved',
+        linkedin: 'https://linkedin.com/in/sagarvedverma',
+        twitter: 'https://twitter.com/sagarvedverma',
+        email: 'sagarvedverma@gmail.com'
       },
       contributions: {
         commits: 1250,
@@ -27,60 +27,60 @@ const TeamsPage: React.FC = () => {
   ];
 
   const contributors = [
-    {
-      id: 1,
-      name: 'Priya Sharma',
-      role: 'Frontend Developer',
-      location: 'Mumbai, India',
-      avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['React', 'TypeScript', 'UI/UX Design'],
-      contributions: { commits: 156, projects: 2 }
-    },
-    {
-      id: 2,
-      name: 'Rahul Kumar',
-      role: 'Backend Developer',
-      location: 'Bangalore, India',
-      avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Java', 'Spring Boot', 'Microservices'],
-      contributions: { commits: 203, projects: 3 }
-    },
-    {
-      id: 3,
-      name: 'Anita Patel',
-      role: 'DevOps Engineer',
-      location: 'Pune, India',
-      avatar: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
-      contributions: { commits: 89, projects: 4 }
-    },
-    {
-      id: 4,
-      name: 'Vikram Singh',
-      role: 'AI/ML Engineer',
-      location: 'Delhi, India',
-      avatar: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Python', 'TensorFlow', 'NLP', 'OpenAI'],
-      contributions: { commits: 134, projects: 2 }
-    },
-    {
-      id: 5,
-      name: 'Sneha Reddy',
-      role: 'Technical Writer',
-      location: 'Hyderabad, India',
-      avatar: 'https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Technical Writing', 'Documentation', 'Content Strategy'],
-      contributions: { commits: 67, projects: 4 }
-    },
-    {
-      id: 6,
-      name: 'Arjun Mehta',
-      role: 'Security Engineer',
-      location: 'Chennai, India',
-      avatar: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=400',
-      skills: ['Cybersecurity', 'Penetration Testing', 'Compliance'],
-      contributions: { commits: 92, projects: 3 }
-    }
+    // {
+    //   id: 1,
+    //   name: 'Priya Sharma',
+    //   role: 'Frontend Developer',
+    //   location: 'Mumbai, India',
+    //   avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   skills: ['React', 'TypeScript', 'UI/UX Design'],
+    //   contributions: { commits: 156, projects: 2 }
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Rahul Kumar',
+    //   role: 'Backend Developer',
+    //   location: 'Bangalore, India',
+    //   avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   skills: ['Java', 'Spring Boot', 'Microservices'],
+    //   contributions: { commits: 203, projects: 3 }
+    // },
+    // {
+    //   id: 3,
+    //   name: 'Anita Patel',
+    //   role: 'DevOps Engineer',
+    //   location: 'Pune, India',
+    //   avatar: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
+    //   contributions: { commits: 89, projects: 4 }
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Vikram Singh',
+    //   role: 'AI/ML Engineer',
+    //   location: 'Delhi, India',
+    //   avatar: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   skills: ['Python', 'TensorFlow', 'NLP', 'OpenAI'],
+    //   contributions: { commits: 134, projects: 2 }
+    // },
+    // {
+    //   id: 5,
+    //   name: 'Sneha Reddy',
+    //   role: 'Technical Writer',
+    //   location: 'Hyderabad, India',
+    //   avatar: 'https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   skills: ['Technical Writing', 'Documentation', 'Content Strategy'],
+    //   contributions: { commits: 67, projects: 4 }
+    // },
+    // {
+    //   id: 6,
+    //   name: 'Arjun Mehta',
+    //   role: 'Security Engineer',
+    //   location: 'Chennai, India',
+    //   avatar: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=400',
+    //   skills: ['Cybersecurity', 'Penetration Testing', 'Compliance'],
+    //   contributions: { commits: 92, projects: 3 }
+    // }
   ];
 
   const teamStats = [
