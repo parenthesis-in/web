@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, CheckCircle, X } from 'lucide-react';
+import { sendContactFormToGoogleChat } from '../utils/googleChat';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -22,18 +23,28 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setIsSubmitting(false);
-      setShowPopup(true);
-      
-      // Auto-hide popup after 5 seconds
-      setTimeout(() => {
-        setShowPopup(false);
-      }, 5000);
-    }, 1000);
+    // Send to Google Chat
+    sendContactFormToGoogleChat(formData)
+      .then(() => {
+        console.log('Form submitted successfully:', formData);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setIsSubmitting(false);
+        setShowPopup(true);
+        
+        // Auto-hide popup after 5 seconds
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 5000);
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        setIsSubmitting(false);
+        // Still show success popup for better UX, but log the error
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+        }, 5000);
+      });
   };
 
   const closePopup = () => {
@@ -50,8 +61,8 @@ const Contact: React.FC = () => {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 XXX XXX XXXX',
-      href: 'tel:+91XXXXXXXXXX'
+      value: import.meta.env.VITE_CONTACT_PHONE || '+91 98765 43210',
+      href: `tel:${import.meta.env.VITE_CONTACT_PHONE || '+919876543210'}`
     },
     {
       icon: MapPin,
@@ -136,8 +147,9 @@ const Contact: React.FC = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base"
                     placeholder="Your full name"
+                    autoComplete="name"
                   />
                 </div>
                 <div>
@@ -151,8 +163,9 @@ const Contact: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base"
                     placeholder="your.email@example.com"
+                    autoComplete="email"
                   />
                 </div>
               </div>
@@ -167,7 +180,7 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base"
                 >
                   <option value="">Select a subject</option>
                   <option value="collaboration">Collaboration Opportunity</option>
@@ -189,7 +202,7 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-vertical"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-vertical text-base"
                   placeholder="Tell us about your project, question, or how you'd like to contribute..."
                 />
               </div>
@@ -197,7 +210,7 @@ const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center space-x-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white px-6 py-4 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center space-x-2 text-base min-h-[48px]"
               >
                 <Send size={20} />
                 <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>

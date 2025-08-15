@@ -34,8 +34,7 @@ const TeamsPage: React.FC = () => {
       location: 'Mumbai, India',
       avatar: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400',
       skills: ['React', 'TypeScript', 'UI/UX Design'],
-      contributions: { commits: 156, projects: 2 },
-      github: 'https://github.com/priyasharma'
+      contributions: { commits: 156, projects: 2 }
     },
     {
       id: 2,
@@ -44,8 +43,7 @@ const TeamsPage: React.FC = () => {
       location: 'Bangalore, India',
       avatar: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400',
       skills: ['Java', 'Spring Boot', 'Microservices'],
-      contributions: { commits: 203, projects: 3 },
-      github: 'https://github.com/rahulkumar'
+      contributions: { commits: 203, projects: 3 }
     },
     {
       id: 3,
@@ -54,8 +52,7 @@ const TeamsPage: React.FC = () => {
       location: 'Pune, India',
       avatar: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=400',
       skills: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
-      contributions: { commits: 89, projects: 4 },
-      github: 'https://github.com/anitapatel'
+      contributions: { commits: 89, projects: 4 }
     },
     {
       id: 4,
@@ -64,8 +61,7 @@ const TeamsPage: React.FC = () => {
       location: 'Delhi, India',
       avatar: 'https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=400',
       skills: ['Python', 'TensorFlow', 'NLP', 'OpenAI'],
-      contributions: { commits: 134, projects: 2 },
-      github: 'https://github.com/vikramsingh'
+      contributions: { commits: 134, projects: 2 }
     },
     {
       id: 5,
@@ -74,8 +70,7 @@ const TeamsPage: React.FC = () => {
       location: 'Hyderabad, India',
       avatar: 'https://images.pexels.com/photos/1181424/pexels-photo-1181424.jpeg?auto=compress&cs=tinysrgb&w=400',
       skills: ['Technical Writing', 'Documentation', 'Content Strategy'],
-      contributions: { commits: 67, projects: 4 },
-      github: 'https://github.com/snehareddy'
+      contributions: { commits: 67, projects: 4 }
     },
     {
       id: 6,
@@ -84,8 +79,7 @@ const TeamsPage: React.FC = () => {
       location: 'Chennai, India',
       avatar: 'https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=400',
       skills: ['Cybersecurity', 'Penetration Testing', 'Compliance'],
-      contributions: { commits: 92, projects: 3 },
-      github: 'https://github.com/arjunmehta'
+      contributions: { commits: 92, projects: 3 }
     }
   ];
 
@@ -333,16 +327,6 @@ const TeamsPage: React.FC = () => {
                     <div className="text-gray-500 dark:text-gray-400 text-xs">Projects</div>
                   </div>
                 </div>
-
-                <a
-                  href={contributor.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
-                >
-                  <Github size={16} className="inline mr-1" />
-                  View Profile
-                </a>
               </div>
             ))}
           </div>
