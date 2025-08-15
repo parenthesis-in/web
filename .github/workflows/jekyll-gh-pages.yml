@@ -21,6 +21,25 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+##Local Env 
+env:
+  # Blogger API Configuration (from Secrets if sensitive)
+  VITE_BLOGGER_BLOG_ID: ${{ secrets.VITE_BLOGGER_BLOG_ID }}
+  VITE_BLOGGER_API_KEY: ${{ secrets.VITE_BLOGGER_API_KEY }}
+  
+  # Application Configuration (public)
+  VITE_APP_NAME: "Parenthesis India Test"
+  VITE_APP_URL: "https://parenthesisindia.in"
+  
+  # Contact Information
+  VITE_CONTACT_EMAIL: "parenthesis.in@gmail.com"
+  VITE_PRIVACY_EMAIL: "parenthesis.in+privacy@gmail.com"
+  VITE_LEGAL_EMAIL: "parenthesis.in+legal@gmail.com"
+  
+  # Social Media Links
+  VITE_GITHUB_URL: "https://github.com/sagar-ved"
+  VITE_LINKEDIN_URL: "https://linkedin.com/in/sagarvedverma"
+  VITE_TWITTER_URL: "https://twitter.com/sagarvedverma"
 jobs:
   # Build job
   build:
