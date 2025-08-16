@@ -123,7 +123,7 @@ const Community: React.FC = () => {
                 <span>View Projects</span>
               </a>
               <a
-                href="mailto:sagar@parenthesisindia.com"
+                href="mailto:sagarvedverma@gmail.com"
                 className="flex items-center space-x-2 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
               >
                 <MessageCircle size={20} />

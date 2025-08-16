@@ -76,7 +76,7 @@ ${data.message}
 
 ---
 *From:* Parenthesis India Website Contact Form
-*Website:* https://parenthesisindia.in`;
+*Website:* https://www.parenthesis.in`;
 };
 
 export default {

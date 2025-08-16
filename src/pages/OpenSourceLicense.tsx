@@ -305,13 +305,13 @@ const OpenSourceLicense: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="mailto:opensource@parenthesisindia.com"
+                href="mailto:parenthesis.in+opensource@gmail.com"
                 className="bg-white text-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200"
               >
                 Contact Us
               </a>
               <a
-                href="https://github.com/sagarvedbairwa"
+                href="https://github.com/parenthesis-in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition-colors duration-200"
