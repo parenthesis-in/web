@@ -35,6 +35,7 @@ env:
   VITE_CONTACT_EMAIL: "parenthesis.in@gmail.com"
   VITE_PRIVACY_EMAIL: "parenthesis.in+privacy@gmail.com"
   VITE_LEGAL_EMAIL: "parenthesis.in+legal@gmail.com"
+  VITE_CONTACT_PHONE: "${{ secrets.VITE_CONTACT_PHONE }}"
 
   # Social Media Links
   VITE_GITHUB_URL: "https://github.com/sagar-ved"
