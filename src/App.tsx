@@ -10,6 +10,10 @@ import NotFound from './pages/NotFound';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import OpenSourceLicense from './pages/OpenSourceLicense';
+import AsteriskPage from './pages/projects/AsteriskPage';
+import TriptiPage from './pages/projects/TriptiPage';
+import DataBridgePage from './pages/projects/DataBridgePage';
+import ParenthesisCaaSPage from './pages/projects/ParenthesisCaaSPage';
 
 function App() {
   return (
@@ -25,6 +29,10 @@ function App() {
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/license" element={<OpenSourceLicense />} />
+              <Route path="/projects/asterisk" element={<AsteriskPage />} />
+              <Route path="/projects/tripti" element={<TriptiPage />} />
+              <Route path="/projects/databridge" element={<DataBridgePage />} />
+              <Route path="/projects/parenthesis-caas" element={<ParenthesisCaaSPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

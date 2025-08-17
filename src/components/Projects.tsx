@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ExternalLink, Github, CreditCard, Database, Bot, MessageSquare } from 'lucide-react';
 
 const Projects: React.FC = () => {
@@ -11,6 +12,7 @@ const Projects: React.FC = () => {
       technologies: ['Java', 'Spring Boot', 'MongoDB', 'Redis', 'Kafka'],
       github: 'https://github.com/sagarvedbairwa/asterisk',
       demo: '#',
+      detailsPath: '/projects/asterisk',
       status: 'Active Development',
       color: 'blue'
     },
@@ -22,6 +24,7 @@ const Projects: React.FC = () => {
       technologies: ['Java', 'Spring Security', 'PostgreSQL', 'Docker', 'Kubernetes'],
       github: 'https://github.com/sagarvedbairwa/databridge',
       demo: '#',
+      detailsPath: '/projects/databridge',
       status: 'Beta',
       color: 'purple'
     },
@@ -33,6 +36,7 @@ const Projects: React.FC = () => {
       technologies: ['Python', 'OpenAI', 'Rasa', 'FastAPI', 'MongoDB'],
       github: 'https://github.com/sagarvedbairwa/tripti-ai',
       demo: '#',
+      detailsPath: '/projects/tripti',
       status: 'Live',
       color: 'green'
     },
@@ -44,6 +48,7 @@ const Projects: React.FC = () => {
       technologies: ['Node.js', 'React', 'Gemini AI', 'WebSocket', 'Docker'],
       github: 'https://github.com/sagarvedbairwa/parenthesis-caas',
       demo: '#',
+      detailsPath: '/projects/parenthesis-caas',
       status: 'Coming Soon',
       color: 'orange'
     }
@@ -151,23 +156,31 @@ const Projects: React.FC = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="flex space-x-3">
+                  <div className="flex flex-col space-y-3">
+                    <Link
+                      to={project.detailsPath}
+                      className={`flex items-center justify-center space-x-2 px-4 py-2 ${colors.button} text-white rounded-lg transition-colors duration-200`}
+                    >
+                      <span>View Details</span>
+                    </Link>
+                    <div className="flex space-x-3">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200"
+                      className="flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 flex-1"
                     >
                       <Github size={16} />
                       <span>Code</span>
                     </a>
                     <a
                       href={project.demo}
-                      className={`flex items-center space-x-2 px-4 py-2 ${colors.button} text-white rounded-lg transition-colors duration-200`}
+                      className="flex items-center justify-center space-x-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 flex-1"
                     >
                       <ExternalLink size={16} />
                       <span>Demo</span>
                     </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -186,7 +199,7 @@ const Projects: React.FC = () => {
               worldwide. Join our community and help build the future of Indian technology.
             </p>
             <a
-              href="https://github.com/sagarvedbairwa"
+              href="https://github.com/parenthesis-in"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
