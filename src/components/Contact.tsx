@@ -55,14 +55,14 @@ const Contact: React.FC = () => {
     {
       icon: Mail,
       label: 'Email',
-      value: import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com',
-      href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com'}`
+      value: import.meta.env.VITE_CONTACT_EMAIL || 'parenthesis-in@gmail.com',
+      href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || 'parenthesis-in@gmail.com'}`
     },
     {
       icon: Phone,
       label: 'Phone',
       value: import.meta.env.VITE_CONTACT_PHONE || '+91 98765 43210',
-      href: `tel:${import.meta.env.VITE_CONTACT_PHONE || '+919876543210'}`
+      href: `tel:${import.meta.env.VITE_CONTACT_PHONE || '+919521696998'}`
     },
     {
       icon: MapPin,

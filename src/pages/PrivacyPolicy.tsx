@@ -262,10 +262,10 @@ const PrivacyPolicy: React.FC = () => {
             </p>
             <div className="space-y-2">
               <p className="text-blue-100">
-                <strong>Privacy Email:</strong> {import.meta.env.VITE_PRIVACY_EMAIL || 'privacy@parenthesisindia.com'}
+                <strong>Privacy Email:</strong> {import.meta.env.VITE_PRIVACY_EMAIL || 'parenthesis-in@gmail.com'}
               </p>
               <p className="text-blue-100">
-                <strong>General Contact:</strong> {import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com'}
+                <strong>General Contact:</strong> {import.meta.env.VITE_CONTACT_EMAIL || 'parenthesis-in@gmail.com'}
               </p>
             </div>
           </div>

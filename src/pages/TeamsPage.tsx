@@ -398,7 +398,7 @@ const TeamsPage: React.FC = () => {
                 View Projects
               </a>
               <a
-                href="mailto:careers@parenthesisindia.com"
+                href="mailto:parenthesis-in+careers@gmail.com"
                 className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors duration-200"
               >
                 Get in Touch

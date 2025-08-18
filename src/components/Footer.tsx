@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
     { icon: Github, href: import.meta.env.VITE_GITHUB_URL || 'https://github.com/sagarvedbairwa', label: 'GitHub' },
     { icon: Linkedin, href: import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/sagarvedbairwa', label: 'LinkedIn' },
     { icon: Twitter, href: import.meta.env.VITE_TWITTER_URL || 'https://twitter.com/sagarvedbairwa', label: 'Twitter' },
-    { icon: Mail, href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || 'sagar@parenthesisindia.com'}`, label: 'Email' }
+    { icon: Mail, href: `mailto:${import.meta.env.VITE_CONTACT_EMAIL || 'parenthesis-in@gmail.com'}`, label: 'Email' }
   ];
 
   const scrollToSection = (href: string) => {
